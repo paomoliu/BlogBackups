@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>AutoLayout学习总结（纯代码） | paomoliu&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从15年3月正式准备做ios开发，到五月底，团队完成属于我们的第一个App，一直没有使用AutoLayout进行布局，当时觉得这个东西好复杂、好难，再加上项目赶得急，就把它丢在一边。在15年接下来的几个月里，没怎么撸码，一直停留在书本上。偶尔遇到一点AutoLayout，会去搜点博客，了解一丢丢AutoLayout。后来发现公司里好多都用AutoLayout，再加上最近在研究开源中国的源代码，它使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AutoLayout学习总结（纯代码）">
+<meta property="og:url" content="http://paomoliu.github.io/2016/01/10/AutoLayout学习总结（纯代码）/index.html">
+<meta property="og:site_name" content="paomoliu's blog">
+<meta property="og:description" content="从15年3月正式准备做ios开发，到五月底，团队完成属于我们的第一个App，一直没有使用AutoLayout进行布局，当时觉得这个东西好复杂、好难，再加上项目赶得急，就把它丢在一边。在15年接下来的几个月里，没怎么撸码，一直停留在书本上。偶尔遇到一点AutoLayout，会去搜点博客，了解一丢丢AutoLayout。后来发现公司里好多都用AutoLayout，再加上最近在研究开源中国的源代码，它使">
+<meta property="og:updated_time" content="2016-01-30T11:27:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AutoLayout学习总结（纯代码）">
+<meta name="twitter:description" content="从15年3月正式准备做ios开发，到五月底，团队完成属于我们的第一个App，一直没有使用AutoLayout进行布局，当时觉得这个东西好复杂、好难，再加上项目赶得急，就把它丢在一边。在15年接下来的几个月里，没怎么撸码，一直停留在书本上。偶尔遇到一点AutoLayout，会去搜点博客，了解一丢丢AutoLayout。后来发现公司里好多都用AutoLayout，再加上最近在研究开源中国的源代码，它使">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/blogImg/paomoliu.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">paomoliu</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Talk is cheap, show me the code</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>標籤</li>
+						
+						
+						<li>關於</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/paomoliu" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/3370595722/profile" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="/paomoliu@foxmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AutoLayout/" style="font-size: 10px;">AutoLayout</a> <a href="/tags/VFL/" style="font-size: 10px;">VFL</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">重庆师范大学12级，软妹子一枚，热爱iOS开发，正在努力学习中，希望能达到新的起点</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">paomoliu</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/blogImg/paomoliu.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">paomoliu</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Talk is cheap, show me the code</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/paomoliu" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/3370595722/profile" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="/paomoliu@foxmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-AutoLayout学习总结（纯代码）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/10/AutoLayout学习总结（纯代码）/" class="article-date">
+  	<time datetime="2016-01-10T09:38:12.000Z" itemprop="datePublished">Jan 10 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AutoLayout学习总结（纯代码）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AutoLayout/">AutoLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VFL/">VFL</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从15年3月正式准备做ios开发，到五月底，团队完成属于我们的第一个App，一直没有使用<code>AutoLayout</code>进行布局，当时觉得这个东西好复杂、好难，再加上项目赶得急，就把它丢在一边。在15年接下来的几个月里，没怎么撸码，一直停留在书本上。偶尔遇到一点<code>AutoLayout</code>，会去搜点博客，了解一丢丢<code>AutoLayout</code>。后来发现公司里好多都用<code>AutoLayout</code>，再加上最近在研究<a href="http://git.oschina.net/oschina/iphone-app" target="_blank" rel="external">开源中国</a>的源代码，它使用<code>AutoLayout</code>纯代码进行布局（主要是<code>VFL</code>），所以决定在出去找工作前，把欠的<code>AutoLayout</code>补起来。</p>
+<a id="more"></a>
+<h1 id="AutoLayout_u662F_u4EC0_u4E48_uFF1F"><a href="#AutoLayout_u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="AutoLayout是什么？"></a>AutoLayout是什么？</h1><p>引用<a href="http://onevcat.com/" target="_blank" rel="external">喵神</a>的<a href="http://onevcat.com/2012/09/autoayout/" target="_blank" rel="external">WWDC 2012 Session笔记——202, 228, 232 AutoLayout（自动布局）入门</a>中的一段话：</p>
+<blockquote>
+<p>使用一句Apple的官方定义的话<br>AutoLayout是一种基于约束的，描述性的布局系统。 Auto Layout Is a Constraint-Based, Descriptive Layout System.<br>关键词：</p>
+<ul>
+<li>基于约束 － 和以往定义frame的位置和尺寸不同，AutoLayout的位置确定是以所谓相对位置的约束来定义的，比如x坐标为superView的中心，y坐标为屏幕底部上方10像素等</li>
+<li>描述性 － 约束的定义和各个view的关系使用接近自然语言或者可视化语言（稍后会提到）的方法来进行描述</li>
+<li>布局系统 － 即字面意思，用来负责界面的各个元素的位置。 </li>
+</ul>
+</blockquote>
+<p> 在<code>AutoLayout</code>中，当描述完视图对象之间的约束后，<code>AutoLayout</code>会自动计算出视图对象的位置和大小，间接的设定视图的<code>Frame</code>。</p>
+<h1 id="u521B_u5EFA_u7EA6_u675F"><a href="#u521B_u5EFA_u7EA6_u675F" class="headerlink" title="创建约束"></a>创建约束</h1><p>使用纯代码进行自动布局，首先必须关闭<code>View</code>的<code>AutoresizingMask</code><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view<span class="variable">.translatesAutoresizingMaskIntoConstraints</span> = <span class="literal">NO</span>;</span><br></pre></td></tr></table></figure></p>
+<p>该属性默认为<code>YES</code>，引用官方的一段话：</p>
+<blockquote>
+<p>If this property’s value is YES, the system creates a set of constraints that duplicate the behavior specified by the view’s autoresizing mask. This also lets you modify the view’s size and location using the view’s frame, bounds, or center properties, allowing you to create a static, frame-based layout within Auto Layout.<br>Note that the autoresizing mask constraints fully specify the view’s size and position; therefore, you cannot add additional constraints to modify this size or position without introducing conflicts. If you want to use Auto Layout to dynamically calculate the size and position of your view, you must set this property to NO, and then provide a non ambiguous, nonconflicting set of constraints for the view. </p>
+</blockquote>
+<p>也就是说，当该属性值为<code>YES</code>时，运行时系统会自动将<code>AutoresizingMask</code>转换为<code>AutoLayout</code>的约束，这些约束很有可能会和我们自己添加的约束产生冲突，所以在使用<code>AutoLayout</code>进行纯代码布局时，必须设置该属性为<code>NO</code>。</p>
+<h2 id="u521B_u5EFA_u7EA6_u675F_u7684_u4E24_u4E2A_u7C7B_u65B9_u6CD5_uFF1A"><a href="#u521B_u5EFA_u7EA6_u675F_u7684_u4E24_u4E2A_u7C7B_u65B9_u6CD5_uFF1A" class="headerlink" title="创建约束的两个类方法："></a>创建约束的两个类方法：</h2><p><code>AutoLayout</code>中约束对应的类是<code>NSLayoutConstraint</code>，一个<code>NSLayoutConstraint</code>实例代表一条约束。<code>NSLayoutConstraint</code>有两个创建约束的类方法:</p>
+<h3 id="1-__u7B2C_u4E00_u4E2A_u7C7B_u65B9_u6CD5_uFF1A"><a href="#1-__u7B2C_u4E00_u4E2A_u7C7B_u65B9_u6CD5_uFF1A" class="headerlink" title="1. 第一个类方法："></a>1. 第一个类方法：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)constraintWithItem:(<span class="keyword">id</span>)view1                     </span><br><span class="line">                         attribute:(<span class="built_in">NSLayoutAttribute</span>)attr1</span><br><span class="line">                         relatedBy:(<span class="built_in">NSLayoutRelation</span>)relation</span><br><span class="line">                            toItem:(<span class="keyword">id</span>)view2</span><br><span class="line">                         attribute:(<span class="built_in">NSLayoutAttribute</span>)attr2</span><br><span class="line">                        multiplier:(<span class="built_in">CGFloat</span>)multiplier</span><br><span class="line">                          constant:(<span class="built_in">CGFloat</span>)c</span><br></pre></td></tr></table></figure>
+<p>该类方法对应的公式：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view1<span class="variable">.attr1</span> = multiplsier × view2<span class="variable">.attr2</span> + c</span><br></pre></td></tr></table></figure></p>
+<p><code>view1</code>：约束左边的视图。<br><code>attr1</code>：<code>view1</code>的属性。<br><code>relation</code>：约束左边的视图与约束右边的视图的关系，上述公式中<code>＝</code>就是其中一种关系，还可以是<code>≥</code>或<code>≤</code>。<br><code>view2</code>：约束右边的视图。<br><code>attr2</code>：<code>view2</code>的属性。<br><code>multiplier</code>：乘数。<br><code>c</code>：常量。</p>
+<p><strong>其中NSLayoutAttribute属性:</strong><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>: <span class="built_in">NSInteger</span> &#123;</span><br><span class="line">   <span class="built_in">NSLayoutAttributeLeft</span> = <span class="number">1</span>,                                   <span class="comment">//左边</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeRight</span>,                                      <span class="comment">//右边</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeTop</span>,                                        <span class="comment">//顶部</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeBottom</span>,                                     <span class="comment">//底部</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeLeading</span>,                                    <span class="comment">//首部</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeTrailing</span>,                                   <span class="comment">//尾部</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeWidth</span>,                                      <span class="comment">//宽</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeHeight</span>,                                     <span class="comment">//高</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeCenterX</span>,                                    <span class="comment">//x轴中心</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeCenterY</span>,                                    <span class="comment">//y轴中心</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeBaseline</span>,                                   <span class="comment">//基线</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeLastBaseline</span> = <span class="built_in">NSLayoutAttributeBaseline</span>,   <span class="comment">//基线，有的对象有超过一行的文本行，该基线是文本行最底的基线</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeFirstBaseline</span>,                              <span class="comment">//基线，有的对象有超过一行的文本行，该基线是文本行最顶的基线</span></span><br><span class="line">   </span><br><span class="line">   <span class="built_in">NSLayoutAttributeLeftMargin</span>,                                 <span class="comment">//左边间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeRightMargin</span>,                                <span class="comment">//右边间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeTopMargin</span>,                                  <span class="comment">//顶部间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeBottomMargin</span>,                               <span class="comment">//底部间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeLeadingMargin</span>,                              <span class="comment">//首部间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeTrailingMargin</span>,                             <span class="comment">//尾部间距</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeCenterXWithinMargins</span>,                       <span class="comment">//The center along the x-axis between the object’s left and right margin.</span></span><br><span class="line">   <span class="built_in">NSLayoutAttributeCenterYWithinMargins</span>,                       <span class="comment">//The center along the y-axis between the object’s top and bottom margin.</span></span><br><span class="line">   </span><br><span class="line">   <span class="built_in">NSLayoutAttributeNotAnAttribute</span> = <span class="number">0</span>                          </span><br><span class="line">&#125; <span class="built_in">NSLayoutAttribute</span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>NSLayoutAttributeNotAnAttribute</code>：官方文档的解释：</p>
+<blockquote>
+<p>A placeholder value that is used to indicate that the constraint’s second item and second attribute are not used in any calculations. Use this value when creating a constraint that assigns a constant to an attribute. For example, item1.height &gt;= 40. If a constraint only has one item, set the second item to nil, and set the second attribute to NSLayoutAttributeNotAnAttribute. </p>
+</blockquote>
+<p>注意：<code>NSLayoutAttributeLeft/NSLayoutAttributeRight</code>和 <code>NSLayoutAttributeLeading/NSLayoutAttributeTrailing</code>的区别是<code>Left/Right</code>永远是指左右，而<code>Leading/Trailing</code>在某些从右至左习惯的地区会变成，<code>Leading</code>是右边，<code>Trailing</code>是左边。由于国际化的关系，Apple推荐使用<code>Leading</code>和<code>Trailing</code>代替<code>Left</code>和<code>Right</code>。</p>
+<p><strong>NSLayoutRelation关系：</strong><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> &#123;</span><br><span class="line">   <span class="built_in">NSLayoutRelationLessThanOrEqual</span> = -<span class="number">1</span>,        <span class="comment">//小于等于</span></span><br><span class="line">   <span class="built_in">NSLayoutRelationEqual</span> = <span class="number">0</span>,                   <span class="comment">//等于</span></span><br><span class="line">   <span class="built_in">NSLayoutRelationGreaterThanOrEqual</span> = <span class="number">1</span>,      <span class="comment">//大于等于</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NSInteger</span> <span class="built_in">NSLayoutRelation</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-__u7B2C_u4E8C_u4E2A_u7C7B_u65B9_u6CD5_uFF1A"><a href="#2-__u7B2C_u4E8C_u4E2A_u7C7B_u65B9_u6CD5_uFF1A" class="headerlink" title="2. 第二个类方法："></a>2. 第二个类方法：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSArray</span>&lt;__kindof <span class="built_in">NSLayoutConstraint</span> *&gt; *)constraintsWithVisualFormat:(<span class="built_in">NSString</span> *)format </span><br><span class="line">                                                                options:(<span class="built_in">NSLayoutFormatOptions</span>)opts</span><br><span class="line">                                                                metrics:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSSdtring</span> *, <span class="keyword">id</span>&gt; *)metrics</span><br><span class="line">                                                                  views:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSSdtring</span> *, <span class="keyword">id</span>&gt; *)views</span><br></pre></td></tr></table></figure>
+<p><code>format</code>：<code>VFL</code>字符串。<br><code>opts</code>：描述在<code>VFL</code>中所有对象的属性和布局方向，默认是<code>0</code>。<br><code>metrics</code>：在<code>VFL</code>中出现的常量字典，字典的<code>keys</code>必须是在<code>VFL</code>中使用的字符串值，他们的值必须是<code>NSNumber</code>对象，编译器在解析<code>VFL</code>字符串时，会自动将键替换为其对应的值。<br><code>views</code>：在<code>VFL</code>中出现的视图字典，字典的<code>keys</code>必须是在<code>VFL</code>中使用的字符串值，他们的值必须是<code>UIView</code>对象。</p>
+<p><strong>其中NSLayoutFormatOptions枚举：</strong><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> &#123;</span><br><span class="line">   <span class="comment">/* choose only one of these */</span></span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllLeft</span> = <span class="built_in">NSLayoutAttributeLeft</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllRight</span> = <span class="built_in">NSLayoutAttributeRight</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllTop</span> = <span class="built_in">NSLayoutAttributeTop</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllBottom</span> = <span class="built_in">NSLayoutAttributeBottom</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllLeading</span> = <span class="built_in">NSLayoutAttributeLeading</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllTrailing</span> = <span class="built_in">NSLayoutAttributeTrailing</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllCenterX</span> = <span class="built_in">NSLayoutAttributeCenterX</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllCenterY</span> = <span class="built_in">NSLayoutAttributeCenterY</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignAllBaseline</span> = <span class="built_in">NSLayoutAttributeBaseline</span>,</span><br><span class="line">   </span><br><span class="line">   <span class="built_in">NSLayoutFormatAlignmentMask</span> = <span class="number">0xFF</span>,</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/* choose only one of these three */</span></span><br><span class="line">   <span class="built_in">NSLayoutFormatDirectionLeadingToTrailing</span> = <span class="number">0</span> &lt;&lt; <span class="number">8</span>, <span class="comment">// default </span></span><br><span class="line">   <span class="built_in">NSLayoutFormatDirectionLeftToRight</span> = <span class="number">1</span> &lt;&lt; <span class="number">8</span>,</span><br><span class="line">   <span class="built_in">NSLayoutFormatDirectionRightToLeft</span> = <span class="number">2</span> &lt;&lt; <span class="number">8</span>,</span><br><span class="line">   </span><br><span class="line">   <span class="built_in">NSLayoutFormatDirectionMask</span> = <span class="number">0x3</span> &lt;&lt; <span class="number">8</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">NSUInteger</span> <span class="built_in">NSLayoutFormatOptions</span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="VFL_uFF08Visul_Format_Language_uFF09"><a href="#VFL_uFF08Visul_Format_Language_uFF09" class="headerlink" title="VFL（Visul Format Language）"></a><strong>VFL（Visul Format Language）</strong></h4><p>若按照第一种方法创建约束，多了就显得很繁琐，于是就有了<code>VFL</code>——可视化格式语言。<br><code>V:</code>：表示纵向<br><code>H:</code>：表示横向（默认）<br><code>|</code> ：表示父视图<br><code>[view]</code>：表示设置约束的视图<br><code>-</code>：表示间距<br><code>&gt;=</code>：表示视图间距、宽度或高度必须大于或等于某个值<br><code>==</code>：表示视图间距、宽度或高度必须等于某个值<br><code>&lt;=</code>：表示视图间距、宽度或高度必须小于或等于某个值<br><code>@</code>：表示优先级</p>
+<p>VFL示例：</p>
+<blockquote>
+<ol>
+<li><code>|-0-[view]-0-|</code>表示与父视图左、右间距为<code>0</code>，等价于<code>|[view]|</code></li>
+<li><code>V:|-0-[view]-0-|</code>表示与父视图顶部、底部间距为<code>0</code>，等价于<code>|-[view]-|</code>、<code>|[view]|</code></li>
+<li><code>|-[view]-|</code>表示水平方向，该字符串表示视图在父视图的左右边缘内，与父视图的左右间距不为<code>0</code></li>
+<li><code>[view1]-[view2]</code>表示两视图间的间距为<code>8</code>（标准间距）</li>
+<li><code>[view(100)]</code>表示视图的宽度为<code>100</code></li>
+<li><code>[view(100@750)]</code>表示视图宽度为<code>100</code>，该约束的优先级为<code>750</code></li>
+<li><code>[view1][view2]</code>表示两视图水平方向紧邻（间距为<code>0</code>）</li>
+<li><code>[view(&gt;=100,&lt;=200)]</code>表示视图的宽度大于等于<code>100</code>且小于等于<code>200</code></li>
+<li><code>|-[view1(view2)]-[view2]-|</code>表示两视图的宽度一样，并在父视图的左右边缘内</li>
+<li><code>V:|-30-[view(100)]</code>表示视图的高度为<code>100</code>，且与父视图顶部间距为<code>30</code></li>
+<li><code>V:|-(==tpadding)-[view1]-&gt;=5-[view2]-(bpadding)|</code>表示两视图的间距必须大于等于<code>5</code>，<code>view1</code>距离父视图顶部<code>tpadding</code>，<code>view2</code>距离父视图底部<code>bpadding</code><br><strong><a href="https://github.com/paomoliu/VFLDemo" target="_blank" rel="external">部分示例源代码</a></strong></li>
+</ol>
+</blockquote>
+<p><code>VFL</code>格式官方文档的介绍<a href="https://developer.apple.com/library/watchos/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage/VisualFormatLanguage.html" target="_blank" rel="external">Visul Format Language</a></p>
+<h2 id="u4F18_u5148_u7EA7"><a href="#u4F18_u5148_u7EA7" class="headerlink" title="优先级"></a>优先级</h2><p>各个约束的力量大小，是根据约束的<code>priority</code>属性的值决定，高优先级的约束会比低优先级约束优先得到满足。官方文档的描述：</p>
+<blockquote>
+<p>If a constraint’s priority level is less than <code>UILayoutPriorityRequired</code>  in OS X or <code>UILayoutPriorityRequired</code> in iOS, then it is optional. Higher priority constraints are met before lower priority constraints.</p>
+</blockquote>
+<p>该属性的取值必须<strong>大于<code>0</code>小于等于<code>1000</code></strong>，它是<code>UILayoutPriority</code>枚举类型，系统内置了<code>4</code>个优先级：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">enum</span> &#123;</span><br><span class="line">   <span class="built_in">UILayoutPriorityRequired</span> = <span class="number">1000</span>,        <span class="comment">//默认优先级</span></span><br><span class="line">   <span class="built_in">UILayoutPriorityDefaultHigh</span> = <span class="number">750</span>,</span><br><span class="line">   <span class="built_in">UILayoutPriorityDefaultLow</span> = <span class="number">250</span>,</span><br><span class="line">   <span class="built_in">UILayoutPriorityFittingSizeLevel</span> = <span class="number">50</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">float</span> <span class="built_in">UILayoutPriority</span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>priority</code>属性的值越大，优先级越高，越会被优先满足。<br>每个约束的默认优先级是<code>UILayoutPriorityRequired</code>，这意味着我们给出的所有约束都必须得到满足，一旦约束间发生冲突，我们的应用就会<strong>Crash</strong>。</p>
+<h2 id="u5C0F_u7ED3"><a href="#u5C0F_u7ED3" class="headerlink" title="小结"></a>小结</h2><p>一般开发中都是多种方式搭配使用，以最简洁的代码实现功能。在这段时间研究的<a href="http://git.oschina.net/oschina/iphone-app" target="_blank" rel="external">开源中国</a>的源代码中，一个源文件中对<code>UITableView</code>的布局就是使用<code>AutoresizingMask</code>，其他的<code>View</code>大部分是使用<code>VFL</code>，但由于<strong>VFL并不能表达所有的约束（如：处理比例约束，处理相对居中效果）</strong>，所以又使用了<code>AutoLayout</code>另一种创建约束的方式。</p>
+<h1 id="u793A_u4F8B"><a href="#u793A_u4F8B" class="headerlink" title="示例"></a>示例</h1><h1 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.jianshu.com/p/ebb8570ad70f" target="_blank" rel="external">学习AutoLayout(NSLayoutConstraint)</a><br><a href="http://www.jianshu.com/p/385070898e77" target="_blank" rel="external">学习AutoLayout(VFL)</a><br><a href="http://www.jianshu.com/p/052e8c7e8e7f" target="_blank" rel="external">Autolayout的第一次亲密接触</a><br><a href="http://grayluo.github.io/WeiFocusIo/autolayout/2015/02/01/autolayout6/" target="_blank" rel="external">AutoLayout深入浅出五[纯代码的偏执]</a><br><a href="http://www.cocoachina.com/ios/20151029/13872.html" target="_blank" rel="external">iOS开发通过代码方式使用AutoLayout (NSLayoutConstraint + Masonry)</a><br><a href="http://xuexuefeng.com/autolayout/" target="_blank" rel="external">iOS 开发实践之 Auto Layout</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/07/MengTime实现过程遇到的问题总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MengTime实现过程遇到的问题总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="AutoLayout学习总结（纯代码）" data-title="AutoLayout学习总结（纯代码）" data-url="http://paomoliu.github.io/2016/01/10/AutoLayout学习总结（纯代码）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 paomoliu
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
